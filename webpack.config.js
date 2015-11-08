@@ -1,8 +1,25 @@
+var path = require('path');
+var webpack = require('webpack');
+
+var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('shared.js');
+
 module.exports = {
-  entry: ["./utils", "./app.js"],
-  output: {
-    filename: "bundle.js"
+  context: path.resolve('js'),
+  entry: {
+    home: './home_page.js'
   },
+  output: {
+    path: path.resolve('build/js/'),
+    publicPath: '/public/assets/js/',
+    filename: "[name].js"
+  },
+
+  plugins: [commonsPlugin],
+
+  devServer: {
+    contentBase: 'public'
+  },
+
   module: {
     preLoaders: [
       {
